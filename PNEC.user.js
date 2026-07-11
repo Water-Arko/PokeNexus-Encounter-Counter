@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PokeNexus Encounter Counter
 // @description  This script shows an overlay for PokeNexus which keeps track of how many encounters you have done and how much money you have gained from them. "Shift + \" to reset the value.
-// @version      1.0
+// @version      1.0.1
 // @author       WaterArko
 // @license      MIT
 // @supportURL   https://github.com/Water-Arko/PokeNexus-Encounter-Counter
@@ -42,7 +42,7 @@
     const bgRightOffset = 10;
 
     // These constants are used for detecting an encounter / money change respectively.
-    const encounterStr = '|request|{"side":{"name":"'; // This may trigger erroneously! I have not tested all the communication thoroughly, so there may be other instances of this data being sent.
+    const encounterStr = '|tier|[gen7] Pokemon Planet Standard - Wild Encounter'; // This may trigger erroneously, as there may be other instances of this data being sent.
     const moneyStr = 'You gained $';
 
     // === SECTION: WebSocket hook ===
