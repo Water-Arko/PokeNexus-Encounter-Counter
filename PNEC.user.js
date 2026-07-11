@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PokeNexus Encounter Counter
 // @description  This script shows an overlay for PokeNexus which keeps track of how many encounters you have done and how much money you have gained from them. "Shift + \" to reset the value.
-// @version      1.0.3
+// @version      1.0.4
 // @author       WaterArko
 // @license      MIT
 // @supportURL   https://github.com/Water-Arko/PokeNexus-Encounter-Counter
@@ -33,8 +33,8 @@
     const counterDivHtml = counterText + '<span id="' + counterSpanId + '">' + GM_getValue("ec", 0) + '</span>' +
                         ' (' + globalCounterText + '<span id="' + globalCounterSpanId + '">' + GM_getValue("ec_g", 0) + '</span>)';
 
-    const moneyDivHtml = moneyText + '<span id="' + moneySpanId + '">$' + GM_getValue("mc", 0) + '</span>' +
-                       ' (' + globalMoneyText + '<span id="' + globalMoneySpanId + '">$' + GM_getValue("mc_g", 0) + '</span>)';
+    const moneyDivHtml = moneyText + '$<span id="' + moneySpanId + '">' + GM_getValue("mc", 0) + '</span>' +
+                       ' (' + globalMoneyText + '$<span id="' + globalMoneySpanId + '">' + GM_getValue("mc_g", 0) + '</span>)';
 
     const textLeftOffset = 8;
     const counterTopOffset = 10;
