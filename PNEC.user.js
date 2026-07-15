@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PokeNexus Encounter Counter
 // @description  This script shows an overlay for PokeNexus which keeps track of how many encounters you have done and how much money you have gained from them. "Shift + \" to reset the value.
-// @version      1.0.4
+// @version      1.0.5
 // @author       WaterArko
 // @license      MIT
 // @supportURL   https://github.com/Water-Arko/PokeNexus-Encounter-Counter
@@ -41,6 +41,8 @@
     const moneyTopOffset = 32;
     const bgRightOffset = 10;
 
+    var isInitialised = false;
+
     // These constants are used for detecting an encounter / money change respectively.
     const encounterStr = 'battle.roomReady'; // This may trigger erroneously, as there may be other instances of this data being sent.
     const moneyStr = 'You gained $';
@@ -66,10 +68,12 @@
         }
 
         // Initialise all the HTML elements for the overlay.
-        initHead();
-        createBackground();
-        createOverlay(counterDivId, counterDivHtml, counterTopOffset, textLeftOffset);
-        createOverlay(moneyDivId, moneyDivHtml, moneyTopOffset, textLeftOffset);
+        if (!isInitialised) {
+            initHead();
+            createBackground();
+            createOverlay(counterDivId, counterDivHtml, counterTopOffset, textLeftOffset);
+            createOverlay(moneyDivId, moneyDivHtml, moneyTopOffset, textLeftOffset);
+        }
         updateOverlay();
 
         // Add a listener to any message that we receive from the WebSocket.
@@ -120,6 +124,7 @@
         link.setAttribute('type', 'text/css');
         link.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
         document.head.appendChild(link);
+        isInitialised = true;
     }
 
     function createBackground() {
@@ -130,7 +135,7 @@
         // Apply CSS styling.
         overlay.style.backgroundColor = 'rgba(42, 41, 40, 0.75)';
         overlay.style.height = '61px';
-        overlay.style.position = 'fixed';
+        overlay.style.position = 'absolute';
         overlay.style.pointerEvers = 'none';
 
         // Append child to the body. Obviously.
@@ -144,7 +149,7 @@
         overlay.innerHTML = text;
 
         // Apply CSS styling.
-        overlay.style.position = 'fixed';
+        overlay.style.position = 'absolute';
         overlay.style.top = topOffset;
         overlay.style.left = leftOffset;
         overlay.style.zIndex = '999';
